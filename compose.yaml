@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  projeto_django_basico:
+    image: projetodjango
+    entrypoint: ./entrypoint.sh
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      DJANGO_SETTINGS_MODULE: "backend.settings"

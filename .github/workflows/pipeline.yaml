@@ -1,0 +1,27 @@
+name: Pipeline
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Copia os arquivos do repósitorio
+        uses: actions/checkout@v3
+
+      - name: Instalar o Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Instalar pipx
+        run: python3 -m pip install --user pipx
+
+      - name: Instalar Poetry
+        run: pipx install poetry
+
+      - name: Instalar Dependências
+        run: poetry install
+
+      - name: Executar testes
+        run: poetry run task test
